@@ -127,12 +127,19 @@ void Socket::connect(int ip, short port)
 {
   initSocket();
 
+  //convert ip
+  int cip = 0;
+  cip |= ip >> 24;
+  cip |= ((ip >> 16) & 255) << 8;
+  cip |= ((ip >> 8) & 255) << 16;
+  cip |= (ip & 255) << 24;
+
   localEndPoint = (struct sockaddr_in*) calloc(1, sizeof (struct sockaddr_in));
   localEndPoint->sin_family = AF_INET;
 
   remoteEndPoint = (struct sockaddr_in*) calloc(1, sizeof (struct sockaddr_in));
   remoteEndPoint->sin_family = AF_INET;
-  remoteEndPoint->sin_addr.s_addr = ip;
+  remoteEndPoint->sin_addr.s_addr = cip;
   remoteEndPoint->sin_port = htons(port);
 
   status = Status::CONNECTING;
