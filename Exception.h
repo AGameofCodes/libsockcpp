@@ -12,17 +12,21 @@
 
 using std::exception;
 
-class Exception : public exception
+namespace libsockcpp
 {
-public:
-  Exception();
-  Exception(char* message);
-  Exception(const Exception& orig);
-  virtual ~Exception();
-  virtual const char* what() const noexcept;
-private:
-  char* message;
-};
+
+  class Exception : public exception
+  {
+  public:
+    Exception();
+    Exception(char* message);
+    Exception(const Exception& orig);
+    virtual ~Exception();
+    virtual const char* what() const noexcept;
+  private:
+    char* message;
+  };
+}
 
 #endif	/* EXCEPTION_H */
 

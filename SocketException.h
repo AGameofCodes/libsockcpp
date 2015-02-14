@@ -10,16 +10,20 @@
 
 #include "Exception.h"
 
-class SocketException : public Exception
+namespace libsockcpp
 {
-public:
-  SocketException();
-  SocketException(char *message);
-  SocketException(const SocketException& orig);
-  virtual ~SocketException();
-private:
 
-};
+  class SocketException : public Exception
+  {
+  public:
+    SocketException();
+    SocketException(char *message);
+    SocketException(const SocketException& orig);
+    virtual ~SocketException();
+  private:
+
+  };
+}
 
 #endif	/* SOCKETEXCEPTION_H */
 

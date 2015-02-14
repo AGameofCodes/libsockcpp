@@ -10,16 +10,20 @@
 
 #include "Exception.h"
 
-class IllegalStateException : public Exception
+namespace libsockcpp
 {
-public:
-  IllegalStateException();
-  IllegalStateException(char* message);
-  IllegalStateException(const IllegalStateException& orig);
-  virtual ~IllegalStateException();
-private:
 
-};
+  class IllegalStateException : public Exception
+  {
+  public:
+    IllegalStateException();
+    IllegalStateException(char* message);
+    IllegalStateException(const IllegalStateException& orig);
+    virtual ~IllegalStateException();
+  private:
+
+  };
+}
 
 #endif	/* ILLEGALSTATEEXCEPTION_H */
 

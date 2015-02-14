@@ -6,15 +6,14 @@
  */
 
 #include "Socket.h"
-#include <sys/socket.h>
-#include <netdb.h>
 #include <cstdlib>
 #include <cstring>
 #include <unistd.h>
 #include "IllegalStateException.h"
 #include "SocketException.h"
 
-//#define NULL 0
+using namespace libsockcpp;
+using std::string;
 
 Socket::Socket() : Socket(AF_INET, SOCK_STREAM, 0)
 {
@@ -55,7 +54,7 @@ void Socket::bind(int ip, short port)
 {
   initSocket();
   int one = 1;
-  setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof (int));
+  ::setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof (int));
 
   localEndPoint = (struct sockaddr_in*) calloc(1, sizeof (struct sockaddr_in));
   localEndPoint->sin_family = AF_INET;
@@ -92,14 +91,14 @@ Socket *Socket::accept()
 
   struct sockaddr_in *cli_addr = (struct sockaddr_in*) calloc(1, sizeof (struct sockaddr_in));
   int clilen = sizeof (struct sockaddr_in);
-  int newsockfd = ::accept(sockfd, (struct sockaddr *) cli_addr, (socklen_t *) &clilen);
-  if(newsockfd == -1)
+  int newsockfd = ::accept(sockfd, (struct sockaddr *) cli_addr, (socklen_t *) & clilen);
+  if (newsockfd == -1)
   {
     throw SocketException("Error while accepting connection!");
   }
-  
+
   struct sockaddr_in *lepcopy = (struct sockaddr_in*) calloc(1, sizeof (struct sockaddr_in));
-  memcpy(lepcopy, localEndPoint, sizeof(struct sockaddr_in));
+  memcpy(lepcopy, localEndPoint, sizeof (struct sockaddr_in));
 
   Socket *s = new Socket(newsockfd, domain, type, protocol, Status::CONNECTED, lepcopy, cli_addr);
 
@@ -191,5 +190,5 @@ void Socket::write(string s)
 
 void Socket::write(string s, int length)
 {
-  write((char*)s.c_str(), length);
+  write((char*) s.c_str(), length);
 }

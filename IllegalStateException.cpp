@@ -6,13 +6,15 @@
  */
 
 #include "IllegalStateException.h"
+using namespace libsockcpp;
 
 IllegalStateException::IllegalStateException() : Exception()
 {
 }
-IllegalStateException::IllegalStateException(char* message) : Exception(message) 
+
+IllegalStateException::IllegalStateException(char* message) : Exception(message)
 {
-  
+
 }
 
 IllegalStateException::IllegalStateException(const IllegalStateException& orig)
@@ -22,4 +24,3 @@ IllegalStateException::IllegalStateException(const IllegalStateException& orig)
 IllegalStateException::~IllegalStateException()
 {
 }
-

@@ -7,6 +7,8 @@
 
 #include "Exception.h"
 
+using namespace libsockcpp;
+
 Exception::Exception() : exception(), message('\0')
 {
 }

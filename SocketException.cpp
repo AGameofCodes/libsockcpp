@@ -7,6 +7,8 @@
 
 #include "SocketException.h"
 
+using namespace libsockcpp;
+
 SocketException::SocketException() : Exception()
 {
 }
