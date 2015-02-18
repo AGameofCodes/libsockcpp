@@ -31,6 +31,7 @@ namespace libsockcpp
     void connect(int ip, short port);
     void close();
 
+    int read();
     int read(char* buffer, int length);
     void write(char* msg, int length);
     void write(std::string s);

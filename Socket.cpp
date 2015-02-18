@@ -170,6 +170,12 @@ void Socket::close()
   status = Status::CLOSED;
 }
 
+int Socket::read()
+{
+  char c[1];
+  int n = read(c, 1);
+  return n > 0 ? n[0] : -1;
+}
 int Socket::read(char* buffer, int length)
 {
   //todo impl udp compat
