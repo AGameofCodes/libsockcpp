@@ -37,6 +37,7 @@ namespace libsockcpp
     void write(char* msg, int length);
     void write(std::string s);
     void write(std::string s, int length);
+    void flush();
 
     enum Status
     {

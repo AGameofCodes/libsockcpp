@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include "IllegalStateException.h"
 #include "SocketException.h"
+#include <netinet/tcp.h>
 
 using namespace libsockcpp;
 using std::string;
@@ -172,6 +173,7 @@ int Socket::read()
   int n = read(c, 1);
   return n > 0 ? c[0] : -1;
 }
+
 int Socket::read(char* buffer, int length)
 {
   //todo impl udp compat
@@ -200,4 +202,13 @@ void Socket::write(string s)
 void Socket::write(string s, int length)
 {
   write((char*) s.c_str(), length);
+}
+
+void Socket::flush()
+{
+  //todo: ignroe if udp
+  int flag = 1;
+  setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
+  flag = 0;
+  setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
 }
