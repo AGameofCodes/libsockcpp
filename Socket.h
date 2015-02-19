@@ -20,6 +20,7 @@ namespace libsockcpp
   public:
     Socket();
     Socket(int domain, int type, int protocol);
+    Socket(const Socket& orig) = delete;
     virtual ~Socket();
 
     void bind(short port);
@@ -51,7 +52,6 @@ namespace libsockcpp
     };
 
   private:
-    Socket(const Socket& orig);
     Socket(int sockfd, int domain, int type, int protocol, Status status, struct sockaddr_in *localEndPoint, struct sockaddr_in *remoteEndPoint);
 
 

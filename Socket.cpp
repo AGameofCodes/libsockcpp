@@ -27,10 +27,6 @@ localEndPoint(NULL), remoteEndPoint(NULL)
 
 }
 
-Socket::Socket(const Socket& orig)
-{
-}
-
 Socket::~Socket()
 {
   close();
