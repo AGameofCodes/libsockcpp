@@ -206,7 +206,7 @@ void Socket::write(string s, int length)
 
 void Socket::flush()
 {
-  //todo: ignroe if udp
+  //todo: ignore if udp
   int flag = 1;
   setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *) &flag, sizeof(int));
   flag = 0;
